@@ -1,33 +1,35 @@
-Interactive Holographic HUD Portfolio
-An interactive, holographic HUD-themed portfolio showcasing my skills in UX Design, Development, and IT/Cybersecurity.
+# Interactive Holographic HUD Portfolio
 
-This project is a custom-built personal portfolio designed to be a memorable and engaging experience, moving beyond the standard webpage format. It presents my work and skills through the metaphor of a futuristic Heads-Up Display (HUD) or a personal operating system.
+> An interactive, holographic HUD-themed portfolio showcasing my skills in UX Design, Development, and IT/Cybersecurity.
 
-➡️ View the Live Site Here
+This project is a custom-built personal portfolio designed to be a memorable and engaging experience, moving beyond the standard webpage format. It presents my work and skills through the use of a futuristic Heads-Up Display (HUD) or a personal operating system.
 
-✨ Features
-Boot Sequence Animation: A thematic, type-on animation that simulates a system booting up on page load.
+[**➡️ View the Live Site Here**](https://your-username.github.io/your-repo-name/)
 
-Holographic HUD Interface: A dynamic, multi-module layout inspired by sci-fi user interfaces.
+---
 
-Live Particle Background: An interactive, animated particle network that reacts to mouse movement for a sense of depth.
+## ✨ Features
 
-"Focus Mode" Interaction: Click any module to have it fluidly animate to the center of the screen, dimming the background for a clean reading experience.
+* **Boot Sequence Animation:** A thematic, type-on animation that simulates a system booting up on page load.
+* **Holographic HUD Interface:** A dynamic, multi-module layout inspired by sci-fi user interfaces.
+* **Live Particle Background:** An interactive, animated particle network that reacts to mouse movement for a sense of depth.
+* **"Focus Mode" Interaction:** Click any module to have it fluidly animate to the center of the screen, dimming the background for a clean reading experience.
+* **Fully Responsive:** The layout seamlessly adapts from a multi-column desktop HUD to a streamlined, single-column view on mobile devices.
 
-Fully Responsive: The layout seamlessly adapts from a multi-column desktop HUD to a streamlined, single-column view on mobile devices.
+---
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
+
 This project was built from the ground up using modern, lightweight web technologies.
 
-HTML5: Semantic structure for content and accessibility.
+* **HTML5:** Semantic structure for content and accessibility.
+* **CSS3:** Custom properties (variables), Flexbox, Grid, and keyframe animations for all styling and responsive layout.
+* **JavaScript (ES6+):** Vanilla JS for all interactivity, including DOM manipulation, event handling, and the live clock.
+* **[tsParticles](https://particles.js.org/):** A lightweight library for the interactive particle background animation.
+* **[anime.js](https://animejs.com/):** A flexible animation library used to power the boot sequence.
 
-CSS3: Custom properties (variables), Flexbox, Grid, and keyframe animations for all styling and responsive layout.
+---
 
-JavaScript (ES6+): Vanilla JS for all interactivity, including DOM manipulation, event handling, and the live clock.
+## 📝 Changelog
 
-tsParticles: A lightweight library for the interactive particle background animation.
-
-anime.js: A flexible animation library used to power the boot sequence.
-
-📝 Changelog
-All significant changes and version history are tracked in the Changelog.
+All significant changes and version history are tracked in the [Changelog](CHANGELOG.md).
