@@ -26,10 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 🚀 BOOT SEQUENCE LOGIC ---
     const bootText = document.getElementById('boot-text');
     const bootSequence = [
-        { text: "INITIALIZING INTERFACE...", delay: 1000 },
-        { text: "ESTABLISHING SECURE CONNECTION...", delay: 1200 },
-        { text: "LOADING USER PROFILE: JANE DOE...", delay: 1500 },
-        { text: "SYSTEMS ONLINE.", delay: 800 }
+        { text: "INITIALIZING INTERFACE...", delay: 600 },
+        { text: "ESTABLISHING SECURE CONNECTION...", delay: 1000 },
+        { text: "LOADING USER PROFILE: ALLAN COLLETT...", delay: 1200 },
+        { text: "SYSTEMS ONLINE.", delay: 600 }
     ];
 
     let textIndex = 0;
