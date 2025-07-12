@@ -155,6 +155,143 @@ body {
     display: none;
 }
 
+/* --- PROJECT CATEGORIES --- */
+.project-categories {
+    display: flex;
+    gap: 1rem;
+    height: 100%;
+    align-items: stretch;
+}
+
+.category-btn {
+    flex: 1;
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: rgba(0, 229, 255, 0.05);
+}
+
+.category-btn:hover {
+    background-color: rgba(0, 229, 255, 0.15);
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+}
+
+.category-btn h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.project-viewer {
+    display: none; /* Hidden until a category is chosen */
+    height: 100%;
+    flex-direction: column;
+}
+
+.back-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    align-self: flex-start;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+.project-list {
+    display: none; /* Each list is hidden by default */
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.project-list h4 {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+}
+
+.project-item {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+}
+.project-item:last-child {
+    border-bottom: none;
+}
+.project-item h5 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* --- SHARED CONTENT BOX STYLES --- */
+.content-box {
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    background-color: rgba(0, 229, 255, 0.05);
+}
+.content-box h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Profile Module Layout */
+.profile-layout {
+    display: flex;
+    gap: 1rem;
+    height: 100%;
+}
+.profile-photo {
+    flex-basis: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profile-photo img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border: 1px solid var(--border-color);
+}
+.profile-bio {
+    flex-basis: 75%;
+}
+
+/* Skills Module Layout */
+.skills-layout {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    height: 100%;
+}
+
+.content-box ul {
+    list-style-type: none; /* Remove default bullets */
+    padding-left: 0;
+}
+
+.content-box li {
+    margin-bottom: 0.75rem;
+    position: relative;
+    padding-left: 1.5rem; /* Make space for custom bullet */
+}
+
+.content-box li::before {
+    content: '»'; /* Use a thematic character for the bullet */
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
 /* --- MODULE POSITIONS (Idle State) --- */
 #profile-module  { top: 2%;   left: 2%;  width: 250px; height: 125px; }
 #projects-module { top: 35%;  left: 2%;  width: 250px; height: 175px; }
@@ -299,5 +436,10 @@ body {
     
     #central-logo {
     display: none;
+    }
+
+    .profile-layout, .skills-layout {
+    flex-direction: column;
+    grid-template-columns: 1fr;
     }
 }
