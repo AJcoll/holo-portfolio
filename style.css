@@ -7,6 +7,7 @@
     --glow-color: rgba(0, 229, 255, 0.5);
     --text-color: #e6f1ff;
     --text-secondary-color: rgba(230, 241, 255, 0.7);
+    --glitch-color: #ff0080; /* Pink for glitch effects */
 }
 
 * {
@@ -53,6 +54,58 @@ body {
     50% { opacity: 0; }
 }
 
+/* --- 🎭 GLITCH EFFECTS --- */
+.glitch {
+    position: relative;
+    animation: glitch 0.3s infinite;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch::before {
+    animation: glitch-1 0.3s infinite;
+    color: var(--glitch-color);
+    z-index: -1;
+}
+
+.glitch::after {
+    animation: glitch-2 0.3s infinite;
+    color: var(--primary-color);
+    z-index: -2;
+}
+
+@keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+}
+
+@keyframes glitch-1 {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(2px, -2px); }
+    40% { transform: translate(2px, 2px); }
+    60% { transform: translate(-2px, -2px); }
+    80% { transform: translate(-2px, 2px); }
+}
+
+@keyframes glitch-2 {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, -2px); }
+    40% { transform: translate(-2px, 2px); }
+    60% { transform: translate(2px, -2px); }
+    80% { transform: translate(2px, 2px); }
+}
+
 /* --- ✨ LIVE BACKGROUND --- */
 #tsparticles {
     position: fixed;
@@ -61,6 +114,26 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
+}
+
+/* --- 📺 DIGITAL NOISE OVERLAY --- */
+#tsparticles::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(0, 229, 255, 0.02) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(0, 229, 255, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    animation: noise-drift 20s infinite linear;
+}
+
+@keyframes noise-drift {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(100px, 100px); }
 }
 
 /* --- 🖥️ HUD INTERFACE --- */
@@ -88,6 +161,25 @@ body {
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
+/* --- 📺 SCAN LINES EFFECT --- */
+.module::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 229, 255, 0.03) 2px,
+        rgba(0, 229, 255, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
 .module-header {
     display: flex;
     justify-content: space-between;
@@ -95,6 +187,8 @@ body {
     border-bottom: 1px solid var(--border-color);
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
 }
 
 .module-title {
@@ -103,6 +197,27 @@ body {
     text-shadow: 0 0 5px var(--glow-color);
     font-weight: 700;
     text-transform: uppercase;
+    position: relative;
+}
+
+/* --- 🔥 ENHANCED GLOW EFFECTS --- */
+.module-title::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--primary-color);
+    filter: blur(8px);
+    opacity: 0.3;
+    z-index: -1;
+    animation: glow-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+    0% { opacity: 0.2; transform: scale(1); }
+    100% { opacity: 0.4; transform: scale(1.05); }
 }
 
 .module-content {
@@ -113,6 +228,8 @@ body {
     font-size: 1rem;
     line-height: 1.6;
     font-weight: 300;
+    position: relative;
+    z-index: 2;
 }
 
 .module-content::-webkit-scrollbar {
@@ -141,6 +258,20 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
     display: none; /* Hidden until focused */
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 10;
+    padding: 0.5rem;
+    min-width: 2rem;
+    min-height: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    color: var(--glitch-color);
+    text-shadow: 0 0 10px var(--glitch-color);
+    transform: scale(1.1);
 }
 
 .module-preview {
@@ -149,10 +280,25 @@ body {
     color: var(--text-secondary-color);
     font-style: italic;
     opacity: 0.7;
+    position: relative;
+    z-index: 2;
 }
 
 .module.focused .module-preview {
     display: none;
+}
+
+/* --- 🔄 ENHANCED MODULE INTERACTIONS --- */
+.module:hover:not(.focused) {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.module.focused {
+    z-index: 10;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 40px rgba(0, 229, 255, 0.4);
 }
 
 /* --- PROJECT CATEGORIES --- */
@@ -299,27 +445,21 @@ body {
 #skills-module   { bottom: 2%; left: 2%;  width: 250px; height: 145px; }
 
 
+/* --- FOCUS STATE --- */
 .module.focused {
+    position: fixed !important;
     top: 50% !important;
     left: 50% !important;
     right: auto !important;
     bottom: auto !important;
-    transform: translate(-50%, -50%);
-    width: 80vw !important; 
-    height: 80vh !important; 
-    max-width: 1200px;
-    z-index: 50;
-}
-
-/* --- FOCUS STATE --- */
-.module.focused {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80vw;
-    height: 80vh;
-    max-width: 1200px;
-    z-index: 50;
+    transform: translate(-50%, -50%) !important;
+    width: 90% !important; 
+    height: 85% !important; 
+    max-width: 1000px;
+    max-height: 800px;
+    z-index: 1000;
+    margin: 0 !important;
+    padding: 1rem !important;
 }
 
 .module.focused .module-content,
@@ -341,11 +481,60 @@ body {
     text-align: right;
     font-size: 0.9rem;
     color: var(--text-secondary-color);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    backdrop-filter: blur(5px);
 }
 
 #system-status #clock, #system-status #date {
      color: var(--primary-color);
      text-shadow: 0 0 5px var(--glow-color);
+     font-weight: 700;
+     margin-bottom: 0.25rem;
+}
+
+.status-line {
+    margin-bottom: 0.25rem;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.status-indicator {
+    color: var(--primary-color);
+    text-shadow: 0 0 3px var(--glow-color);
+    font-weight: 700;
+    animation: status-blink 2s infinite;
+}
+
+.signal-strength {
+    color: var(--primary-color);
+    font-family: monospace;
+    letter-spacing: 1px;
+}
+
+.battery-level {
+    color: var(--primary-color);
+    font-family: monospace;
+    letter-spacing: 1px;
+    animation: battery-pulse 3s infinite;
+}
+
+#uptime {
+    color: var(--primary-color);
+    font-family: monospace;
+    font-weight: 700;
+}
+
+@keyframes status-blink {
+    0%, 90%, 100% { opacity: 1; }
+    95% { opacity: 0.3; }
+}
+
+@keyframes battery-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
 }
 
 /* --- CENTRAL LOGO --- */
@@ -361,7 +550,20 @@ body {
     transition: opacity 0.5s ease;
     pointer-events: none; /* Makes it non-interactive */
     text-shadow: 0 0 20px var(--glow-color);
-    animation: pulse 5s infinite ease-in-out;
+    animation: logo-float 8s infinite ease-in-out;
+}
+
+#central-logo::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: radial-gradient(circle, rgba(0, 229, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: logo-glow 4s infinite ease-in-out;
+    z-index: -1;
 }
 
 #central-logo span:last-child {
@@ -373,18 +575,33 @@ body {
     opacity: 0;
 }
 
-@keyframes pulse {
-    0% {
+@keyframes logo-float {
+    0%, 100% {
         opacity: 0.15;
-        transform: translate(-50%, -50%) scale(1);
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    25% {
+        opacity: 0.25;
+        transform: translate(-50%, -50%) scale(1.02) rotate(0.5deg);
     }
     50% {
         opacity: 0.3;
-        transform: translate(-50%, -50%) scale(1.05);
+        transform: translate(-50%, -50%) scale(1.05) rotate(0deg);
     }
-    100% {
-        opacity: 0.15;
-        transform: translate(-50%, -50%) scale(1);
+    75% {
+        opacity: 0.25;
+        transform: translate(-50%, -50%) scale(1.02) rotate(-0.5deg);
+    }
+}
+
+@keyframes logo-glow {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1);
     }
 }
 
