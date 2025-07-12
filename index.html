@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allan Collett | Portfolio OS v1.0</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="boot-sequence">
+        <span id="boot-text"></span>
+        <span class="blinking-cursor">_</span>
+    </div>
+
+    <div id="tsparticles"></div>
+
+    <main id="hud-interface">
+
+        <div id="system-status">
+            <div id="clock">10:38:07 AM</div>
+            <div id="date">07/12/2025</div>
+            <div>STATUS: <span style="color: var(--primary-color);">NOMINAL</span></div>
+        </div>
+
+        <div class="module" id="profile-module" data-content-id="profile-content">
+            <div class="module-header">
+                <h2 class="module-title">[ PROFILE ]</h2>
+                <button class="close-btn" aria-label="Close Module">&times;</button>
+            </div>
+            <div class="module-content"></div>
+        </div>
+        
+        <div class="module" id="projects-module" data-content-id="projects-content">
+            <div class="module-header">
+                <h2 class="module-title">[ PROJECT DATABASE ]</h2>
+                <button class="close-btn" aria-label="Close Module">&times;</button>
+            </div>
+            <div class="module-content"></div>
+        </div>
+        
+        <div class="module" id="contact-module" data-content-id="contact-content">
+            <div class="module-header">
+                <h2 class="module-title">[ COMMS UPLINK ]</h2>
+                <button class="close-btn" aria-label="Close Module">&times;</button>
+            </div>
+            <div class="module-content"></div>
+        </div>
+
+        <div class="module" id="skills-module" data-content-id="skills-content">
+            <div class="module-header">
+                <h2 class="module-title">[ SKILL MATRIX ]</h2>
+                <button class="close-btn" aria-label="Close Module">&times;</button>
+            </div>
+            <div class="module-content"></div>
+        </div>
+        
+    </main>
+    
+    <div id="content-storage" style="display: none;">
+    
+        <div id="profile-content">
+            <p>
+                Hello. I'm Allan Collett, a multi-disciplinary designer and technologist with a passion for creating intuitive user experiences and secure digital systems. My background spans UX design, IT support, and cybersecurity analysis, giving me a unique perspective on how to build products that are not only user-friendly but also robust and secure.
+            </p>
+            <p>
+                This portfolio is a showcase of my work and my approach to problem-solving. Feel free to explore.
+            </p>
+        </div>
+        
+        <div id="projects-content">
+            <h3>Project 1: Redesign of a Mobile Banking App</h3>
+            <p>
+                A comprehensive UX case study focusing on improving the user flow for money transfers. I conducted user research, created wireframes and interactive prototypes, and performed usability testing to validate the design changes, resulting in a 25% reduction in task completion time. 
+                <a href="#" target="_blank">View Full Case Study &rarr;</a>
+            </p>
+
+            <h3>Project 2: Cybersecurity Phishing Awareness Campaign</h3>
+            <p>
+                Developed and executed a simulated phishing campaign for a mid-sized company to test and improve employee awareness of social engineering threats. Analyzed results and presented a security briefing to management with recommendations for training.
+                <a href="#" target="_blank">View Report Summary &rarr;</a>
+            </p>
+
+            <h3>Project 3: IT Automation Script</h3>
+            <p>
+                Wrote a Python script to automate the process of onboarding new employees, creating user accounts across multiple systems and assigning appropriate permissions. This reduced manual workload for the IT team by 8 hours per week.
+                <a href="#" target="_blank">View on GitHub &rarr;</a>
+            </p>
+        </div>
+
+        <div id="contact-content">
+            <p>I'm always open to new opportunities and collaborations.</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:Allanjcollett@email.com">Allanjcollett@email.com</a></li>
+                <li><strong>LinkedIn:</strong> <a href="#" target="_blank">linkedin.com/in/allan-collett</a></li>
+                <li><strong>GitHub:</strong> <a href="#" target="_blank">github.com/AJcol</a></li>
+            </ul>
+        </div>
+        
+        <div id="skills-content">
+            <h3>UX / Design</h3>
+            <p>Figma, Adobe XD, Wireframing, Prototyping, User Research, Usability Testing</p>
+            
+            <h3>Cybersecurity & IT</h3>
+            <p>Network Security, CompTIA Security+, Vulnerability Assessment, Active Directory, IT Support</p>
+
+            <h3>Development</h3>
+            <p>HTML, CSS, JavaScript, Python, Bash Scripting</p>
+        </div>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.10.1/tsparticles.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

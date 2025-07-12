@@ -1,0 +1,247 @@
+/* --- 🎨 MASTER STYLES & THEME --- */
+:root {
+    --primary-color: #00e5ff; /* Bright Cyan */
+    --background-color: #0d1117; /* Darkest Blue/Black */
+    --glass-color: rgba(23, 38, 56, 0.6); /* Semi-transparent glass */
+    --border-color: rgba(0, 229, 255, 0.2);
+    --glow-color: rgba(0, 229, 255, 0.5);
+    --text-color: #e6f1ff;
+    --text-secondary-color: rgba(230, 241, 255, 0.7);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Rajdhani', sans-serif;
+    overflow: hidden; /* Prevent scrollbars during animations */
+    font-weight: 400;
+}
+
+/* --- 🚀 BOOT SEQUENCE --- */
+#boot-sequence {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--background-color);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--glow-color);
+}
+
+#boot-sequence span {
+    opacity: 0; /* Initially hidden, made visible by JS */
+}
+
+#boot-sequence .blinking-cursor {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    from, to { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* --- ✨ LIVE BACKGROUND --- */
+#tsparticles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* --- 🖥️ HUD INTERFACE --- */
+#hud-interface {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    opacity: 0; /* Hidden until boot sequence finishes */
+    transition: opacity 0.5s ease-in;
+}
+
+#hud-interface.visible {
+    opacity: 1;
+}
+
+.module {
+    position: absolute;
+    background: var(--glass-color);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    overflow: hidden;
+    padding: 1rem;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+.module-title {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    text-shadow: 0 0 5px var(--glow-color);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.module-content {
+    display: none; /* Hidden until focused */
+    height: calc(100% - 45px); /* Full height minus header */
+    overflow-y: auto;
+    color: var(--text-secondary-color);
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+.module-content::-webkit-scrollbar {
+    width: 5px;
+}
+.module-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+.module-content::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+.module-content p { margin-bottom: 1rem; }
+.module-content h3 { color: var(--primary-color); margin: 1.5rem 0 0.5rem; }
+.module-content a { color: var(--primary-color); text-decoration: none; font-weight: 500;}
+.module-content a:hover { text-decoration: underline; }
+.module-content ul { list-style: none; }
+.module-content li { margin-bottom: 0.5rem; }
+
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none; /* Hidden until focused */
+}
+
+/* --- MODULE POSITIONS (Idle State) --- */
+#profile-module  { top: 2%;   left: 2%;  width: 250px; height: 100px; }
+#projects-module { top: 35%;  left: 2%;  width: 250px; height: 150px; }
+#contact-module  { bottom: 2%; right: 2%; width: 250px; height: 100px; }
+#skills-module   { bottom: 2%; left: 2%;  width: 250px; height: 120px; }
+
+/* This is the key: We are making the focused rule more specific */
+.module.focused {
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 80vh;
+    max-width: 1200px;
+    z-index: 50;
+}
+
+/* --- FOCUS STATE --- */
+.module.focused {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 80vh;
+    max-width: 1200px;
+    z-index: 50;
+}
+
+.module.focused .module-content,
+.module.focused .close-btn {
+    display: block;
+}
+
+.hud-dimmed .module:not(.focused) {
+    opacity: 0.2;
+    transform: scale(0.95);
+    pointer-events: none;
+}
+
+/* --- SYSTEM STATUS --- */
+#system-status {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    text-align: right;
+    font-size: 0.9rem;
+    color: var(--text-secondary-color);
+}
+
+#system-status #clock, #system-status #date {
+     color: var(--primary-color);
+     text-shadow: 0 0 5px var(--glow-color);
+}
+
+/* --- RESPONSIVE DESIGN FOR MOBILE --- */
+@media (max-width: 768px) {
+    body { overflow-y: auto; } /* Allow scrolling on mobile */
+    
+    /* On mobile, modules are stacked vertically, not floating */
+    #hud-interface {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .module, #skills-module, #contact-module, #profile-module, #projects-module {
+        position: relative;
+        width: 100%;
+        height: auto;
+        top: auto;
+        left: auto;
+        bottom: auto;
+        right: auto;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    .module.focused {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95vw;
+    height: 90vh;
+    }
+
+    .hud-dimmed .module:not(.focused) {
+        display: none; /* Hide non-focused modules completely on mobile */
+    }
+
+    #system-status {
+        position: relative;
+        top: auto;
+        right: auto;
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+}
