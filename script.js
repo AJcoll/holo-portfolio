@@ -17,8 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         interactivity: {
             detect_on: "canvas",
-            events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: false }, resize: true },
-            modes: { grab: { distance: 140, line_opacity: 0.5 } }
+            events: { 
+                onhover: { enable: true, mode: "grab" }, 
+                onclick: { enable: true, mode: "push" }, 
+                resize: true 
+            },
+            modes: { 
+                grab: { distance: 140, line_opacity: 0.5 },
+                push: { particles_nb: 3 }
+            }
         },
         detectRetina: true
     });
@@ -26,23 +33,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 🚀 BOOT SEQUENCE LOGIC ---
     const bootText = document.getElementById('boot-text');
     const bootSequence = [
-        { text: "INITIALIZING INTERFACE...", delay: 600 },
-        { text: "ESTABLISHING SECURE CONNECTION...", delay: 1000 },
-        { text: "LOADING USER PROFILE: ALLAN COLLETT...", delay: 1200 },
-        { text: "SYSTEMS ONLINE.", delay: 600 }
+        { text: "INITIALIZING INTERFACE...", delay: 600, glitch: true },
+        { text: "ESTABLISHING SECURE CONNECTION...", delay: 1000, glitch: false },
+        { text: "LOADING USER PROFILE: ALLAN COLLETT...", delay: 1200, glitch: true },
+        { text: "SYSTEMS ONLINE.", delay: 600, glitch: false }
     ];
 
     let textIndex = 0;
     function typeBootText() {
         if (textIndex < bootSequence.length) {
-            bootText.textContent = bootSequence[textIndex].text;
+            const currentStep = bootSequence[textIndex];
+            bootText.textContent = currentStep.text;
+            bootText.setAttribute('data-text', currentStep.text);
+            
+            // Add glitch effect for certain boot messages
+            if (currentStep.glitch) {
+                bootText.classList.add('glitch');
+                // Remove glitch after animation
+                setTimeout(() => {
+                    bootText.classList.remove('glitch');
+                }, 2000);
+            }
+            
             anime({
                 targets: bootText,
                 opacity: [0, 1],
                 duration: 500,
                 easing: 'easeInOutQuad',
                 complete: () => {
-                    setTimeout(typeBootText, bootSequence[textIndex].delay);
+                    setTimeout(typeBootText, currentStep.delay);
                     textIndex++;
                 }
             });
@@ -50,27 +69,87 @@ document.addEventListener('DOMContentLoaded', () => {
             // End of boot sequence
             const bootContainer = document.getElementById('boot-sequence');
             const hud = document.getElementById('hud-interface');
-            anime({
-                targets: bootContainer,
-                opacity: 0,
-                duration: 500,
-                easing: 'easeInOutQuad',
-                complete: () => {
-                    bootContainer.style.display = 'none';
-                    hud.classList.add('visible');
-                }
-            });
+            
+            // Add final glitch effect before transition
+            bootText.classList.add('glitch');
+            
+            setTimeout(() => {
+                anime({
+                    targets: bootContainer,
+                    opacity: 0,
+                    duration: 500,
+                    easing: 'easeInOutQuad',
+                    complete: () => {
+                        bootContainer.style.display = 'none';
+                        hud.classList.add('visible');
+                        // Trigger module entrance animations
+                        animateModulesEntrance();
+                    }
+                });
+            }, 1000);
         }
     }
+    
+    // --- 🎬 MODULE ENTRANCE ANIMATIONS ---
+    function animateModulesEntrance() {
+        const modules = document.querySelectorAll('.module');
+        const systemStatus = document.getElementById('system-status');
+        const centralLogo = document.getElementById('central-logo');
+        
+        // Animate system status first
+        anime({
+            targets: systemStatus,
+            opacity: [0, 1],
+            translateY: [20, 0],
+            duration: 800,
+            easing: 'easeOutCubic',
+            delay: 200
+        });
+        
+        // Animate central logo
+        anime({
+            targets: centralLogo,
+            opacity: [0, 1],
+            scale: [0.8, 1],
+            duration: 1000,
+            easing: 'easeOutElastic(1, 0.5)',
+            delay: 400
+        });
+        
+        // Stagger animate modules
+        anime({
+            targets: modules,
+            opacity: [0, 1],
+            translateY: [30, 0],
+            scale: [0.9, 1],
+            duration: 800,
+            easing: 'easeOutCubic',
+            delay: anime.stagger(150, { startDelay: 600 })
+        });
+    }
+    
     typeBootText(); // Start the sequence
 
     // --- ⏰ SYSTEM CLOCK & DATE ---
     const clockEl = document.getElementById('clock');
     const dateEl = document.getElementById('date');
+    const uptimeEl = document.getElementById('uptime');
+    
+    // Track uptime
+    const startTime = new Date();
+    
     function updateTime() {
         const now = new Date();
         clockEl.textContent = now.toLocaleTimeString();
         dateEl.textContent = now.toLocaleDateString();
+        
+        // Calculate uptime
+        const uptime = now - startTime;
+        const hours = Math.floor(uptime / (1000 * 60 * 60));
+        const minutes = Math.floor((uptime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((uptime % (1000 * 60)) / 1000);
+        
+        uptimeEl.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
     setInterval(updateTime, 1000);
     updateTime();
@@ -92,8 +171,17 @@ modules.forEach(module => {
             resetProjectsModule(currentlyFocused); // Reset if it was the projects module
         }
         
-        module.classList.add('focused');
-        hudInterface.classList.add('hud-dimmed');
+        // Enhanced focus animation
+        anime({
+            targets: module,
+            scale: [1, 1.02, 1],
+            duration: 300,
+            easing: 'easeOutCubic',
+            complete: () => {
+                module.classList.add('focused');
+                hudInterface.classList.add('hud-dimmed');
+            }
+        });
 
         const contentId = module.dataset.contentId;
         const contentSource = document.getElementById(contentId);
@@ -111,9 +199,19 @@ modules.forEach(module => {
     // Logic to close a module
     closeBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        module.classList.remove('focused');
-        hudInterface.classList.remove('hud-dimmed');
-        resetProjectsModule(module); // Reset projects module on close
+        
+        // Enhanced close animation
+        anime({
+            targets: module,
+            scale: [1, 0.98, 1],
+            duration: 300,
+            easing: 'easeOutCubic',
+            complete: () => {
+                module.classList.remove('focused');
+                hudInterface.classList.remove('hud-dimmed');
+                resetProjectsModule(module); // Reset projects module on close
+            }
+        });
     });
 });
 
