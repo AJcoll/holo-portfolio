@@ -20,47 +20,69 @@
 
     <div id="tsparticles"></div>
 
-    <main id="hud-interface">
+    <!-- 🖥️ Main HUD Interface -->
+<main id="hud-interface">
+    
+    <div id="central-logo">
+        <span>A</span><span>C</span>
+    </div>
+    
+    <!-- System Status Module -->
+    <div id="system-status">
+        <div id="clock">11:20:00 AM</div>
+        <div id="date">07/12/2025</div>
+        <div>STATUS: <span style="color: var(--primary-color);">NOMINAL</span></div>
+    </div>
 
-        <div id="system-status">
-            <div id="clock">10:38:07 AM</div>
-            <div id="date">07/12/2025</div>
-            <div>STATUS: <span style="color: var(--primary-color);">NOMINAL</span></div>
+    <!-- Profile Module -->
+    <div class="module" id="profile-module" data-content-id="profile-content">
+        <div class="module-header">
+            <h2 class="module-title">[ PROFILE ]</h2>
+            <button class="close-btn" aria-label="Close Module">&times;</button>
         </div>
+        <div class="module-preview">
+            <p>Who I am and what I do.</p>
+        </div>
+        <div class="module-content"></div>
+    </div>
+    
+    <!-- Projects Module -->
+    <div class="module" id="projects-module" data-content-id="projects-content">
+        <div class="module-header">
+            <h2 class="module-title">[ PROJECT DATABASE ]</h2>
+            <button class="close-btn" aria-label="Close Module">&times;</button>
+        </div>
+        <div class="module-preview">
+            <p>A selection of my case studies and work.</p>
+        </div>
+        <div class="module-content"></div>
+    </div>
+    
+    <!-- Contact Module -->
+    <div class="module" id="contact-module" data-content-id="contact-content">
+        <div class="module-header">
+            <h2 class="module-title">[ COMMS UPLINK ]</h2>
+            <button class="close-btn" aria-label="Close Module">&times;</button>
+        </div>
+        <div class="module-preview">
+            <p>Ways to get in touch with me.</p>
+        </div>
+        <div class="module-content"></div>
+    </div>
 
-        <div class="module" id="profile-module" data-content-id="profile-content">
-            <div class="module-header">
-                <h2 class="module-title">[ PROFILE ]</h2>
-                <button class="close-btn" aria-label="Close Module">&times;</button>
-            </div>
-            <div class="module-content"></div>
+    <!-- Skills Module -->
+    <div class="module" id="skills-module" data-content-id="skills-content">
+        <div class="module-header">
+            <h2 class="module-title">[ SKILL MATRIX ]</h2>
+            <button class="close-btn" aria-label="Close Module">&times;</button>
         </div>
-        
-        <div class="module" id="projects-module" data-content-id="projects-content">
-            <div class="module-header">
-                <h2 class="module-title">[ PROJECT DATABASE ]</h2>
-                <button class="close-btn" aria-label="Close Module">&times;</button>
-            </div>
-            <div class="module-content"></div>
+        <div class="module-preview">
+            <p>A summary of my technical abilities.</p>
         </div>
-        
-        <div class="module" id="contact-module" data-content-id="contact-content">
-            <div class="module-header">
-                <h2 class="module-title">[ COMMS UPLINK ]</h2>
-                <button class="close-btn" aria-label="Close Module">&times;</button>
-            </div>
-            <div class="module-content"></div>
-        </div>
-
-        <div class="module" id="skills-module" data-content-id="skills-content">
-            <div class="module-header">
-                <h2 class="module-title">[ SKILL MATRIX ]</h2>
-                <button class="close-btn" aria-label="Close Module">&times;</button>
-            </div>
-            <div class="module-content"></div>
-        </div>
-        
-    </main>
+        <div class="module-content"></div>
+    </div>
+    
+</main>
     
     <div id="content-storage" style="display: none;">
     

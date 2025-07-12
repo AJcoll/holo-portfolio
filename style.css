@@ -143,11 +143,23 @@ body {
     display: none; /* Hidden until focused */
 }
 
+.module-preview {
+    padding: 0.5rem 0 0 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary-color);
+    font-style: italic;
+    opacity: 0.7;
+}
+
+.module.focused .module-preview {
+    display: none;
+}
+
 /* --- MODULE POSITIONS (Idle State) --- */
-#profile-module  { top: 2%;   left: 2%;  width: 250px; height: 100px; }
-#projects-module { top: 35%;  left: 2%;  width: 250px; height: 150px; }
-#contact-module  { bottom: 2%; right: 2%; width: 250px; height: 100px; }
-#skills-module   { bottom: 2%; left: 2%;  width: 250px; height: 120px; }
+#profile-module  { top: 2%;   left: 2%;  width: 250px; height: 125px; }
+#projects-module { top: 35%;  left: 2%;  width: 250px; height: 175px; }
+#contact-module  { bottom: 2%; right: 2%; width: 250px; height: 125px; }
+#skills-module   { bottom: 2%; left: 2%;  width: 250px; height: 145px; }
 
 
 .module.focused {
@@ -199,6 +211,46 @@ body {
      text-shadow: 0 0 5px var(--glow-color);
 }
 
+/* --- CENTRAL LOGO --- */
+#central-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--primary-color);
+    font-size: 10rem;
+    font-weight: 700;
+    opacity: 0.15;
+    transition: opacity 0.5s ease;
+    pointer-events: none; /* Makes it non-interactive */
+    text-shadow: 0 0 20px var(--glow-color);
+    animation: pulse 5s infinite ease-in-out;
+}
+
+#central-logo span:last-child {
+    margin-left: -2.5rem; /* Overlaps the letters slightly for style */
+}
+
+/* Hide the logo when a module is focused */
+.hud-dimmed #central-logo {
+    opacity: 0;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.15;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+    100% {
+        opacity: 0.15;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
 /* --- RESPONSIVE DESIGN FOR MOBILE --- */
 @media (max-width: 768px) {
     body { overflow-y: auto; } /* Allow scrolling on mobile */
@@ -243,5 +295,9 @@ body {
         right: auto;
         text-align: left;
         margin-bottom: 1rem;
+    }
+    
+    #central-logo {
+    display: none;
     }
 }
